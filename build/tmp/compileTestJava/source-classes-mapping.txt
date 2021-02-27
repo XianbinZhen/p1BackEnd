@@ -2,3 +2,5 @@ dev/zhen/utilTests/ConnectionUtilTest.java
  dev.zhen.utilTests.ConnectionUtilTest
 dev/zhen/daoTests/ExpenseDaoTests.java
  dev.zhen.daoTests.ExpenseDaoTests
+dev/zhen/serviceTests/ExpenseServiceTests.java
+ dev.zhen.serviceTests.ExpenseServiceTests
