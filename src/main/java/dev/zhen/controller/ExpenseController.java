@@ -1,9 +1,11 @@
 package dev.zhen.controller;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.google.gson.Gson;
 import dev.zhen.customException.ExpenseNotFoundException;
 import dev.zhen.entities.Expense;
 import dev.zhen.services.ExpenseService;
+import dev.zhen.utils.JwtUtil;
 import io.javalin.http.Handler;
 import org.apache.log4j.Logger;
 
@@ -66,28 +68,41 @@ public class ExpenseController {
         }
     };
     public Handler updateExpenseByIdHandler = ctx -> {
-        int expenseId = Integer.parseInt(ctx.pathParam("eid"));
-        String body = ctx.body();
-        Expense updateExpense = gson.fromJson(body, Expense.class);
-        if (updateExpense != null) {
-            try {
-                Expense expense = expenseService.updateExpenseById(expenseId, updateExpense);
-                if (expense != null) {
-                    ctx.result(gson.toJson(expense));
-                    ctx.status(200);
+        String jwt = ctx.header("Authorization");
+        DecodedJWT decodedJWT = JwtUtil.verifyToken(jwt);
+        if (decodedJWT != null) {
+            String role = decodedJWT.getClaim("role").asString();
+            if (role.toLowerCase().equals("manager")) {
+                int expenseId = Integer.parseInt(ctx.pathParam("eid"));
+                String body = ctx.body();
+                Expense updateExpense = gson.fromJson(body, Expense.class);
+                if (updateExpense != null) {
+                    try {
+                        Expense expense = expenseService.updateExpenseById(expenseId, updateExpense);
+                        if (expense != null) {
+                            ctx.result(gson.toJson(expense));
+                            ctx.status(200);
+                        } else {
+                            ctx.result("Failed to update expense by id");
+                            ctx.status(400);
+                        }
+                    } catch (ExpenseNotFoundException expenseNotFoundException) {
+                        expenseNotFoundException.printStackTrace();
+                        ctx.result("Failed to update expense by id: expense not found");
+                        ctx.status(404);
+                    }
                 } else {
                     ctx.result("Failed to update expense by id");
                     ctx.status(400);
                 }
-
-            } catch (ExpenseNotFoundException expenseNotFoundException) {
-                expenseNotFoundException.printStackTrace();
-                ctx.result("Failed to update expense by id: expense not found");
-                ctx.status(404);
+            } else {
+                ctx.result("Employee is not authorized to this resource");
+                ctx.status(403);
             }
+
         } else {
-            ctx.result("Failed to update expense by id");
-            ctx.status(400);
+            ctx.result("Unauthorized token");
+            ctx.status(401);
         }
     };
     public Handler deleteExpenseByIdHandler = ctx -> {

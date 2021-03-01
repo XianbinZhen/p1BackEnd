@@ -18,6 +18,9 @@ public class ExpenseServiceImpl implements ExpenseService{
 
     @Override
     public Expense createExpense(int employeeId, Expense expense) {
+        long time = System.currentTimeMillis()/1000;
+        expense.setDateSubmitted(time);
+        expense.setDateProcessed(time);
         return expenseDAO.createExpense(employeeId, expense);
     }
 
@@ -38,6 +41,7 @@ public class ExpenseServiceImpl implements ExpenseService{
 
     @Override
     public Expense updateExpenseById(int id, Expense expense) throws ExpenseNotFoundException {
+        expense.setDateProcessed(System.currentTimeMillis()/1000);
         return expenseDAO.updateExpenseById(id, expense);
     }
 

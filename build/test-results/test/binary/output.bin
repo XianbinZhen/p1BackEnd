@@ -1,0 +1,1 @@
+rEmployee{employeeId=1, account='cloud', password='123456', firstName='Cloud', lastName='Strife', isManager=true}
