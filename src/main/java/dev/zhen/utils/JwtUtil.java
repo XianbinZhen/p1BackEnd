@@ -10,10 +10,12 @@ public class JwtUtil {
     private static final String SECRET = "SUPER_SAFE_SECRET";
     private static final Algorithm algorithm = Algorithm.HMAC256(SECRET);
 
-    public static String generate(String role, String employeeName) {
+    public static String generate(String role, String firstName, String lastName, int employeeId) {
         String token = JWT.create()
                 .withClaim("role", role)
-                .withClaim("employeeName", employeeName)
+                .withClaim("firstName", firstName)
+                .withClaim("lastName", lastName)
+                .withClaim("employeeId", employeeId)
                 .sign(algorithm);
         return token;
     }

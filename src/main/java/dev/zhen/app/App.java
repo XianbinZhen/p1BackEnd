@@ -18,8 +18,8 @@ public class App {
         );
 
         ExpenseController expenseController = new ExpenseController(new ExpenseServiceImpl(new ExpenseDaoPostgres()));
-        EmployeeController employeeController = new EmployeeController(new EmployeeServiceImpl(new EmployeeDaoPostgres()));
-        LoginController loginController = new LoginController();
+//        EmployeeController employeeController = new EmployeeController(new EmployeeServiceImpl(new EmployeeDaoPostgres()));
+        LoginController loginController = new LoginController(new EmployeeServiceImpl(new EmployeeDaoPostgres()));
 
         app.post("/expense", expenseController.createExpenseHandler);
         app.get("/expense", expenseController.getAllExpenseHandler);
@@ -27,7 +27,7 @@ public class App {
         app.post("/expense/:eid", expenseController.updateExpenseByIdHandler);
         app.delete("/expense/:eid", expenseController.deleteExpenseByIdHandler);
 
-        app.get("/employee", employeeController.getEmployeeByUsernameHandler);
+//        app.get("/employee", employeeController.getEmployeeByUsernameHandler);
 
         app.post("/users/login", loginController.loginHandler);
 

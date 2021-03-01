@@ -10,7 +10,7 @@ public class JwtTests {
     @Test
     @Order(0)
     void generate_jwt() {
-        String jwt = JwtUtil.generate("employee", "Chalice Ferdy");
+        String jwt = JwtUtil.generate("employee", "Chalice", "Ferdy", 1);
         System.out.println(jwt);
     }
 
