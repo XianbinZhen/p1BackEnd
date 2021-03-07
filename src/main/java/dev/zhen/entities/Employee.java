@@ -1,6 +1,8 @@
 package dev.zhen.entities;
 
 import javax.persistence.*;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name = "employee")
@@ -19,6 +21,9 @@ public class Employee {
     private String lastName;
     @Column(name = "is_manager")
     private boolean isManager;
+
+    @OneToMany(mappedBy = "employeeId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Expense> expenseList = new LinkedList<>();
 
     public Employee() {
     }
@@ -78,6 +83,14 @@ public class Employee {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Expense> getExpenseList() {
+        return expenseList;
+    }
+
+    public void setExpenseList(List<Expense> expenseList) {
+        this.expenseList = expenseList;
     }
 
     @Override

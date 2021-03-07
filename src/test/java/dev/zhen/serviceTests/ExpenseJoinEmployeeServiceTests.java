@@ -1,7 +1,6 @@
 package dev.zhen.serviceTests;
 
-import dev.zhen.daos.EmployeeDaoPostgres;
-import dev.zhen.daos.ExpenseDaoPostgres;
+import dev.zhen.daos.ExpenseJoinEmployeeDaoHibernate;
 import dev.zhen.entities.ExpenseJoinEmployee;
 import dev.zhen.services.*;
 import org.junit.jupiter.api.Assertions;
@@ -12,7 +11,7 @@ import java.util.List;
 public class ExpenseJoinEmployeeServiceTests {
 
     ExpenseJoinEmployeeService expenseJoinEmployeeServicee = new ExpenseJoinEmployeeServiceImpl(
-            new ExpenseDaoPostgres(), new EmployeeDaoPostgres());
+           new ExpenseJoinEmployeeDaoHibernate());
 
     @Test
     void get_all_expense_join_employee_test() {

@@ -2,9 +2,9 @@ package dev.zhen.daos;
 
 import dev.zhen.entities.Employee;
 import dev.zhen.utils.HibernateUtil;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.util.List;
 

@@ -4,8 +4,7 @@ import dev.zhen.controller.EmployeeController;
 import dev.zhen.controller.ExpenseController;
 import dev.zhen.controller.ExpenseJoinEmployeeController;
 import dev.zhen.controller.LoginController;
-import dev.zhen.daos.EmployeeDaoPostgres;
-import dev.zhen.daos.ExpenseDaoPostgres;
+import dev.zhen.daos.*;
 import dev.zhen.services.EmployeeServiceImpl;
 import dev.zhen.services.ExpenseJoinEmployeeServiceImpl;
 import dev.zhen.services.ExpenseServiceImpl;
@@ -19,11 +18,12 @@ public class App {
                 }
         );
 
-        ExpenseController expenseController = new ExpenseController(new ExpenseServiceImpl(new ExpenseDaoPostgres()));
+        ExpenseController expenseController = new ExpenseController(new ExpenseServiceImpl(new ExpenseDaoHibernate()));
 //        EmployeeController employeeController = new EmployeeController(new EmployeeServiceImpl(new EmployeeDaoPostgres()));
         LoginController loginController = new LoginController(new EmployeeServiceImpl(new EmployeeDaoPostgres()));
-        ExpenseJoinEmployeeController expenseJoinEmployeeController = new ExpenseJoinEmployeeController(
-                new ExpenseJoinEmployeeServiceImpl(new ExpenseDaoPostgres(), new EmployeeDaoPostgres()));
+//        ExpenseJoinEmployeeController expenseJoinEmployeeController = new ExpenseJoinEmployeeController(
+//                new ExpenseJoinEmployeeServiceImpl(new ExpenseDaoPostgres(), new EmployeeDaoPostgres()));
+        ExpenseJoinEmployeeController expenseJoinEmployeeController = new ExpenseJoinEmployeeController(new ExpenseJoinEmployeeServiceImpl(new ExpenseJoinEmployeeDaoHibernate()));
         app.post("/expense", expenseController.createExpenseHandler);
         app.get("/expense", expenseController.getAllExpenseHandler);
         app.get("/expense/:eid", expenseController.getExpenseByIdHandler);
