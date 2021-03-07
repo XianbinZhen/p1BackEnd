@@ -17,8 +17,8 @@ public class ExpenseDaoTests {
     @Test
     @Order(0)
     void create_expense_test() {
-        Expense expense1 = new Expense(0, 0, 123, "Bus", Status.APPROVED,0,0);
-        Expense expense2 = new Expense(0, 0, 1230, "Plane", Status.APPROVED,0,0);
+        Expense expense1 = new Expense(0, 0, 123, "Bus", Status.APPROVED,0,0, "");
+        Expense expense2 = new Expense(0, 0, 1230, "Plane", Status.APPROVED,0,0, "");
         Expense createdExpense1 = expenseDAO.createExpense(1, expense1);
         Expense createdExpense2 = expenseDAO.createExpense(1, expense2);
         Assertions.assertNotNull(createdExpense1);
@@ -30,7 +30,7 @@ public class ExpenseDaoTests {
     void get_all_expense_test() {
         List<Expense> allExpense = expenseDAO.getAllExpense();
         int before = allExpense.size();
-        Expense expense1 = new Expense(0, 0, 423, "Ship", Status.APPROVED,0,0);
+        Expense expense1 = new Expense(0, 0, 423, "Ship", Status.APPROVED,0,0, "");
         expenseDAO.createExpense(1, expense1);
         allExpense = expenseDAO.getAllExpense();
         Assertions.assertNotNull(allExpense);
@@ -43,7 +43,7 @@ public class ExpenseDaoTests {
     void get_all_expense_by_employee_id() {
         List<Expense> allExpense = expenseDAO.getAllExpenseByEmployeeId(1);
         int before = allExpense.size();
-        Expense expense1 = new Expense(0, 0, 423, "Ship", Status.APPROVED,0,0);
+        Expense expense1 = new Expense(0, 0, 423, "Ship", Status.APPROVED,0,0, "");
         expenseDAO.createExpense(1, expense1);
         allExpense = expenseDAO.getAllExpenseByEmployeeId(1);
         Assertions.assertNotNull(allExpense);
@@ -54,7 +54,7 @@ public class ExpenseDaoTests {
     @Test
     @Order(4)
     void get_expense_by_id() {
-        Expense expense = new Expense(0, 0, 230, "train", Status.APPROVED,0,0);
+        Expense expense = new Expense(0, 0, 230, "train", Status.APPROVED,0,0, "");
         expense = expenseDAO.createExpense(1, expense);
         Expense returnExpense = expenseDAO.getExpenseById(expense.getExpenseId());
         Assertions.assertEquals(returnExpense.getExpenseId(), expense.getExpenseId());
@@ -63,9 +63,9 @@ public class ExpenseDaoTests {
     @Test
     @Order(5)
     void update_expense_by_id() {
-        Expense expense = new Expense(0, 0, 423, "Book", Status.DENIED,0,0);
+        Expense expense = new Expense(0, 0, 423, "Book", Status.DENIED,0,0, "");
         expense = expenseDAO.createExpense(1, expense);
-        Expense updateExpense = new Expense(0, 2, 323, "Book", Status.APPROVED,1,1);
+        Expense updateExpense = new Expense(0, 2, 323, "Book", Status.APPROVED,1,1, "");
         try {
             expense = expenseDAO.updateExpenseById(expense.getExpenseId(), updateExpense);
             Assertions.assertEquals(expense.getAmount(), 323);
@@ -78,7 +78,7 @@ public class ExpenseDaoTests {
     @Test
     @Order(6)
     void delete_expense_by_id() {
-        Expense expense = new Expense(0, 0, 423, "Book", Status.DENIED,0,0);
+        Expense expense = new Expense(0, 0, 423, "Book", Status.DENIED,0,0, "");
         expense = expenseDAO.createExpense(1, expense);
         int before = expenseDAO.getAllExpense().size();
         try {

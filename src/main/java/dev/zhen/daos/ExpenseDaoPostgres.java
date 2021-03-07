@@ -18,7 +18,7 @@ public class ExpenseDaoPostgres implements ExpenseDAO{
     @Override
     public Expense createExpense(int employeeId, Expense expense) {
         try (Connection connection = ConnectionUtil.createConnection()) {
-            String sql = "insert into expense (employee_id, amount, reason, status, date_submitted, date_processed) values (?, ?, ?, ?, ?, ?)";
+            String sql = "insert into expense (employee_id, amount, reason, status, date_submitted, date_processed, img_url) values (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, employeeId);
             preparedStatement.setDouble(2, expense.getAmount());
@@ -26,6 +26,7 @@ public class ExpenseDaoPostgres implements ExpenseDAO{
             preparedStatement.setInt(4, expense.getStatus().ordinal());
             preparedStatement.setLong(5, expense.getDateSubmitted());
             preparedStatement.setLong(6, expense.getDateProcessed());
+            preparedStatement.setString(7, expense.getImgUrl());
             preparedStatement.execute();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             resultSet.next();
@@ -54,7 +55,8 @@ public class ExpenseDaoPostgres implements ExpenseDAO{
                 Status status = Status.values()[resultSet.getInt("status")];
                 long dateSubmitted = resultSet.getLong("date_submitted");
                 long dateProcessed = resultSet.getLong("date_processed");
-                Expense expense = new Expense(expenseId, employeeId, amount, reason, status, dateSubmitted, dateProcessed);
+                String imgUrl = resultSet.getString("img_url");
+                Expense expense = new Expense(expenseId, employeeId, amount, reason, status, dateSubmitted, dateProcessed, imgUrl);
                 resultList.add(expense);
             }
             return resultList;
@@ -80,7 +82,8 @@ public class ExpenseDaoPostgres implements ExpenseDAO{
                 Status status = Status.values()[resultSet.getInt("status")];
                 long dateSubmitted = resultSet.getLong("date_submitted");
                 long dateProcessed = resultSet.getLong("date_processed");
-                Expense expense = new Expense(expenseId, employeeId, amount, reason, status, dateSubmitted, dateProcessed);
+                String imgUrl = resultSet.getString("img_url");
+                Expense expense = new Expense(expenseId, employeeId, amount, reason, status, dateSubmitted, dateProcessed, imgUrl);
                 resultList.add(expense);
             }
             return resultList;
@@ -106,7 +109,8 @@ public class ExpenseDaoPostgres implements ExpenseDAO{
                 Status status = Status.values()[resultSet.getInt("status")];
                 long dateSubmitted = resultSet.getLong("date_submitted");
                 long dateProcessed = resultSet.getLong("date_processed");
-                Expense expense = new Expense(expenseId, employeeId, amount, reason, status, dateSubmitted, dateProcessed);
+                String imgUrl = resultSet.getString("img_url");
+                Expense expense = new Expense(expenseId, employeeId, amount, reason, status, dateSubmitted, dateProcessed, imgUrl);
                 return expense;
             } else
                 return null;
@@ -124,7 +128,7 @@ public class ExpenseDaoPostgres implements ExpenseDAO{
             throw new ExpenseNotFoundException("Expense with id " + id + " is not found");
         else {
             try (Connection connection = ConnectionUtil.createConnection()) {
-                String sql = "update expense set employee_id = ?, amount = ?, reason = ?, status = ?, date_submitted = ?, date_processed = ? where expense_id = ?";
+                String sql = "update expense set employee_id = ?, amount = ?, reason = ?, status = ?, date_submitted = ?, date_processed = ?, img_url = ? where expense_id = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, expense.getEmployeeId());
                 preparedStatement.setDouble(2, expense.getAmount());
@@ -132,7 +136,8 @@ public class ExpenseDaoPostgres implements ExpenseDAO{
                 preparedStatement.setInt(4, expense.getStatus().ordinal());
                 preparedStatement.setLong(5, expense.getDateSubmitted());
                 preparedStatement.setLong(6, expense.getDateProcessed());
-                preparedStatement.setInt(7, id);
+                preparedStatement.setString(7, expense.getImgUrl());
+                preparedStatement.setInt(8, id);
                 preparedStatement.execute();
                 expense.setExpenseId(id);
                 return expense;

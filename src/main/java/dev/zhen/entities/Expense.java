@@ -2,16 +2,34 @@ package dev.zhen.entities;
 
 import dev.zhen.enums.Status;
 
-public class Expense {
-    private int expenseId;
-    private int employeeId;
-    private double amount;
-    private String reason;
-    private Status status;
-    private long dateSubmitted;
-    private long dateProcessed;
+import javax.persistence.*;
 
-    public Expense(int expenseId, int employeeId, double amount, String reason, Status status, long dateSubmitted, long dateProcessed) {
+@Entity
+@Table(name = "expense")
+public class Expense {
+    @Id
+    @Column(name = "expense_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int expenseId;
+    @Column(name = "employee_id")
+    private int employeeId;
+    @Column(name = "amount")
+    private double amount;
+    @Column(name = "reason")
+    private String reason;
+    @Column(name = "status")
+    private Status status;
+    @Column(name = "date_submitted")
+    private long dateSubmitted;
+    @Column(name = "date_processed")
+    private long dateProcessed;
+    @Column(name = "img_url")
+    private String imgUrl;
+
+    public Expense() {
+    }
+
+    public Expense(int expenseId, int employeeId, double amount, String reason, Status status, long dateSubmitted, long dateProcessed, String imgUrl) {
         this.expenseId = expenseId;
         this.employeeId = employeeId;
         this.amount = amount;
@@ -19,6 +37,7 @@ public class Expense {
         this.status = status;
         this.dateSubmitted = dateSubmitted;
         this.dateProcessed = dateProcessed;
+        this.imgUrl = imgUrl;
     }
 
     public int getExpenseId() {
@@ -77,6 +96,15 @@ public class Expense {
         this.dateProcessed = dateProcessed;
     }
 
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
     @Override
     public String toString() {
         return "Expense{" +
@@ -87,6 +115,7 @@ public class Expense {
                 ", status=" + status +
                 ", dateSubmitted=" + dateSubmitted +
                 ", dateProcessed=" + dateProcessed +
+                ", imgUrl='" + imgUrl + '\'' +
                 '}';
     }
 }

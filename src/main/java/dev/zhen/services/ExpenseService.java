@@ -10,6 +10,6 @@ public interface ExpenseService {
     List<Expense> getAllExpense();
     List<Expense> getAllExpenseByEmployeeId(int employeeId);
     Expense getExpenseById(int id);
-    Expense updateExpenseById(int id, Expense expense) throws ExpenseNotFoundException;
+    Expense updateExpenseById(Expense expense) throws ExpenseNotFoundException;
     boolean deleteExpenseById(int id) throws ExpenseNotFoundException;
 }

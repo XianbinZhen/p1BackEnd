@@ -20,8 +20,8 @@ public class ExpenseServiceTests {
     @Test
     @Order(0)
     void create_expense_test() {
-        Expense expense1 = new Expense(0, 0, 123, "Bus", Status.APPROVED,0,0);
-        Expense expense2 = new Expense(0, 0, 1230, "Plane", Status.APPROVED,0,0);
+        Expense expense1 = new Expense(0, 0, 123, "Bus", Status.APPROVED,0,0, "");
+        Expense expense2 = new Expense(0, 0, 1230, "Plane", Status.APPROVED,0,0, "");
         Expense createdExpense1 = expenseService.createExpense(1, expense1);
         Expense createdExpense2 = expenseService.createExpense(1, expense2);
         Assertions.assertNotNull(createdExpense1);
@@ -33,7 +33,7 @@ public class ExpenseServiceTests {
     void get_all_expense_test() {
         List<Expense> allExpense = expenseService.getAllExpense();
         int before = allExpense.size();
-        Expense expense1 = new Expense(0, 0, 423, "Ship", Status.APPROVED,0,0);
+        Expense expense1 = new Expense(0, 0, 423, "Ship", Status.APPROVED,0,0, "");
         expenseService.createExpense(1, expense1);
         allExpense = expenseService.getAllExpense();
         Assertions.assertNotNull(allExpense);
@@ -46,7 +46,7 @@ public class ExpenseServiceTests {
     void get_all_expense_by_employee_id() {
         List<Expense> allExpense = expenseService.getAllExpenseByEmployeeId(1);
         int before = allExpense.size();
-        Expense expense1 = new Expense(0, 0, 423, "Ship", Status.APPROVED,0,0);
+        Expense expense1 = new Expense(0, 0, 423, "Ship", Status.APPROVED,0,0, "");
         expenseService.createExpense(1, expense1);
         allExpense = expenseService.getAllExpenseByEmployeeId(1);
         Assertions.assertNotNull(allExpense);
@@ -57,7 +57,7 @@ public class ExpenseServiceTests {
     @Test
     @Order(4)
     void get_expense_by_id() {
-        Expense expense = new Expense(0, 0, 230, "train", Status.APPROVED,0,0);
+        Expense expense = new Expense(0, 0, 230, "train", Status.APPROVED,0,0, "");
         expense = expenseService.createExpense(1, expense);
         Expense returnExpense = expenseService.getExpenseById(expense.getExpenseId());
         Assertions.assertEquals(returnExpense.getExpenseId(), expense.getExpenseId());
@@ -66,11 +66,11 @@ public class ExpenseServiceTests {
     @Test
     @Order(5)
     void update_expense_by_id() {
-        Expense expense = new Expense(0, 0, 423, "Book", Status.DENIED,0,0);
+        Expense expense = new Expense(0, 0, 423, "Book", Status.DENIED,0,0, "");
         expense = expenseService.createExpense(1, expense);
-        Expense updateExpense = new Expense(0, 2, 323, "Book", Status.APPROVED,1,1);
+        Expense updateExpense = new Expense(expense.getExpenseId(), 2, 323, "Book", Status.APPROVED,1,1, "");
         try {
-            expense = expenseService.updateExpenseById(expense.getExpenseId(), updateExpense);
+            expense = expenseService.updateExpenseById(updateExpense);
             Assertions.assertEquals(expense.getAmount(), 323);
             Assertions.assertEquals(expense.getDateSubmitted(), 1);
         } catch (ExpenseNotFoundException e) {
@@ -81,7 +81,7 @@ public class ExpenseServiceTests {
     @Test
     @Order(6)
     void delete_expense_by_id() {
-        Expense expense = new Expense(0, 0, 423, "Book", Status.DENIED,0,0);
+        Expense expense = new Expense(0, 0, 423, "Book", Status.DENIED,0,0, "");
         expense = expenseService.createExpense(1, expense);
         int before = expenseService.getAllExpense().size();
         try {

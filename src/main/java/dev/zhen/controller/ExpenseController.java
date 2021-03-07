@@ -78,7 +78,8 @@ public class ExpenseController {
                 Expense updateExpense = gson.fromJson(body, Expense.class);
                 if (updateExpense != null) {
                     try {
-                        Expense expense = expenseService.updateExpenseById(expenseId, updateExpense);
+                        updateExpense.setExpenseId(expenseId);
+                        Expense expense = expenseService.updateExpenseById(updateExpense);
                         if (expense != null) {
                             ctx.result(gson.toJson(expense));
                             ctx.status(200);

@@ -3,7 +3,6 @@ package dev.zhen.daoTests;
 import dev.zhen.daos.EmployeeDAO;
 import dev.zhen.daos.EmployeeDaoPostgres;
 import dev.zhen.entities.Employee;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 public class EmployeeDaoTests {
@@ -12,7 +11,14 @@ public class EmployeeDaoTests {
 
     @Test
     void get_employee_by_username() {
-        Employee employee = employeeDAO.getEmployeeByUsername("cloud","123456");
+        Employee employee = employeeDAO.getEmployeeByUsername("cloud","1");
         System.out.println(employee);
+    }
+
+    @Test
+    void get_employee_by_id() {
+        Employee employee = employeeDAO.getEmployeeById(1);
+        System.out.println(employee);
+
     }
 }
