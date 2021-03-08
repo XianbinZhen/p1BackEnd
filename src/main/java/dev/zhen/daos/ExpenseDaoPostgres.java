@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class ExpenseDaoPostgres implements ExpenseDAO{
 

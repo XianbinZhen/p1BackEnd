@@ -1,7 +1,5 @@
 package dev.zhen.entities;
 
-import dev.zhen.enums.Status;
-
 public class ExpenseJoinEmployee {
     private Expense expense;
     private Employee employee;

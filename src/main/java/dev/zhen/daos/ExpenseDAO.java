@@ -4,7 +4,6 @@ import dev.zhen.customException.ExpenseNotFoundException;
 import dev.zhen.entities.Expense;
 
 import java.util.List;
-import java.util.Set;
 
 public interface ExpenseDAO {
 

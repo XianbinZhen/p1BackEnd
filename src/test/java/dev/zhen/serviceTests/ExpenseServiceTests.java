@@ -1,7 +1,6 @@
 package dev.zhen.serviceTests;
 
 import dev.zhen.customException.ExpenseNotFoundException;
-import dev.zhen.daos.ExpenseDAO;
 import dev.zhen.daos.ExpenseDaoPostgres;
 import dev.zhen.entities.Expense;
 import dev.zhen.enums.Status;

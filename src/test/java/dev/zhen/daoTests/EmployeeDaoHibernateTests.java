@@ -2,7 +2,6 @@ package dev.zhen.daoTests;
 
 import dev.zhen.daos.EmployeeDAO;
 import dev.zhen.daos.EmployeeDaoHibernate;
-import dev.zhen.daos.EmployeeDaoPostgres;
 import dev.zhen.entities.Employee;
 import org.junit.jupiter.api.Test;
 

@@ -12,6 +12,7 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int expenseId;
     @Column(name = "employee_id")
+    @JoinColumn(name = "employee_id")
     private int employeeId;
     @Column(name = "amount")
     private double amount;
