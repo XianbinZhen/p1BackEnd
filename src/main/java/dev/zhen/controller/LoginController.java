@@ -27,7 +27,7 @@ public class LoginController {
                 String role = employee.isManager() ? "manager" : "employee";
 //                String employeeName = employee.getFirstName() + " " + employee.getLastName();
                 String jwt = JwtUtil.generate(role, employee.getFirstName(), employee.getLastName(), employee.getEmployeeId());
-//            ctx.cookie("jwt", jwt, 3600 * 24);
+                ctx.cookie("jwt", jwt, 3600 * 24);
                 ctx.result(jwt);
                 ctx.status(201);
                 logger.info("username: " + employee.getUsername() + " login.");

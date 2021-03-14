@@ -43,4 +43,19 @@ public class EmployeeDaoHibernate implements EmployeeDAO{
             return null;
         }
     }
+
+    @Override
+    public List<Employee> getAllEmployee() {
+        SessionFactory sessionFactory = HibernateUtil.createSessionFactory();
+        Session session = sessionFactory.openSession();
+        String hql = "from Employee";
+        Query query = session.createQuery(hql);
+        List<Employee> employeeList = query.list();
+        session.close();
+        if (employeeList.size() > 0) {
+            return employeeList;
+        } else {
+            return null;
+        }
+    }
 }

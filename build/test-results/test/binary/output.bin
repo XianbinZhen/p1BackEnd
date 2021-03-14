@@ -1,4 +1,2 @@
-°Hibernate: select employee0_.employee_id as employee1_0_, employee0_.first_name as first_na2_0_, employee0_.is_manager as is_manag3_0_, employee0_.last_name as last_nam4_0_, employee0_.password as password5_0_, employee0_.username as username6_0_ from employee employee0_ where employee0_.employee_id=?
-nEmployee{employeeId=1, username='cloud', password='1', firstName='Cloud', lastName='Strife', isManager=true}
-ÇHibernate: select employee0_.employee_id as employee1_0_, employee0_.first_name as first_na2_0_, employee0_.is_manager as is_manag3_0_, employee0_.last_name as last_nam4_0_, employee0_.password as password5_0_, employee0_.username as username6_0_ from employee employee0_ where employee0_.username=? and employee0_.password=?
-oEmployee{employeeId=2, username='tifa', password='1', firstName='Tifa', lastName='Lockhart', isManager=false}
+mEmployee{employeeId=1, username='joker', password='1', firstName='Ren', lastName='Amamiya', isManager=true}
+rEmployee{employeeId=3, username='panther', password='1', firstName='Anne', lastName='Takamaki', isManager=false}

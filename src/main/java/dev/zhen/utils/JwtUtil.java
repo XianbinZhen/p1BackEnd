@@ -6,7 +6,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 
 public class JwtUtil {
 
-    private static final String SECRET = "SUPER_SAFE_SECRET";
+    private static final String SECRET = System.getenv("JWT_SECRET");
     private static final Algorithm algorithm = Algorithm.HMAC256(SECRET);
 
     public static String generate(String role, String firstName, String lastName, int employeeId) {
