@@ -16,7 +16,7 @@ dev/zhen/daoTests/EmployeeDaoTests.java
  dev.zhen.daoTests.EmployeeDaoTests
 dev/zhen/daoTests/ExpenseDaoHibernateTests.java
  dev.zhen.daoTests.ExpenseDaoHibernateTests
-dev/zhen/utilTests/HibernateUtilTest.java
- dev.zhen.utilTests.HibernateUtilTest
 dev/zhen/serviceTests/EmployeeServiceTest.java
  dev.zhen.serviceTests.EmployeeServiceTest
+dev/zhen/utilTests/HibernateUtilTest.java
+ dev.zhen.utilTests.HibernateUtilTest

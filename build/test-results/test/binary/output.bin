@@ -1,2 +1,0 @@
-mEmployee{employeeId=1, username='joker', password='1', firstName='Ren', lastName='Amamiya', isManager=true}
-rEmployee{employeeId=3, username='panther', password='1', firstName='Anne', lastName='Takamaki', isManager=false}

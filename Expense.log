@@ -1,0 +1,5 @@
+19-08-2021 11:11:03 ERROR SqlExceptionHelper:142 - ERROR: relation "expense" does not exist
+  Position: 303
+19-08-2021 11:11:50 ERROR SqlExceptionHelper:142 - ERROR: relation "expense" does not exist
+  Position: 303
+19-08-2021 11:27:07 INFO  LoginController:33 - username: joker login.
